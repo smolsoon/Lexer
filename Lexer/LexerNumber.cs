@@ -3,7 +3,7 @@ using Lexer.Models;
 
 namespace Lexer
 {
-    public class TokenNumber : CheckRegex, ILexer
+    public class LexerNumber : CheckRegex, ILexer
     {
         public Token Show(string substance, int count)
         {
@@ -21,7 +21,7 @@ namespace Lexer
 
                 if (Dot(@char))
                 {
-                    var finder = new TokenFloat();
+                    var finder = new LexerFloat();
                     var token = finder.Show(substance, count);
 
                     if (token.Type == TokenType.BadChar)

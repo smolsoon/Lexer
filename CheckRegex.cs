@@ -35,5 +35,10 @@ namespace Lexer
         {
             return string.IsNullOrWhiteSpace(variable.ToString());
         }
+
+        public bool OtherChar(char variable)
+        {
+            return Regex.IsMatch(variable.ToString(), "[~@#$%^&]");
+        }
     }
 }

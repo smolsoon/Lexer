@@ -3,7 +3,7 @@ using Lexer.Models;
 
 namespace Lexer
 {
-    public class TokenId : CheckRegex, ILexer
+    public class LexerId : CheckRegex, ILexer
     {
         public Token Show(string substance, int count)
         {

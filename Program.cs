@@ -1,36 +1,91 @@
 using System;
 using System.Collections.Generic;
 using Lexer.Models;
-using Services.Lexer;
+using Lexer.Parser;
+using Lexer.Services;
+
 
 namespace Lexer
 {
     public class Program
     {
         private static void Main(string[] args)
-        {            
-            ICollection<Token> _tokens = new List<Token>();
+        { 
+            #region Lexer   
+            // ICollection<Token> _tokens = new List<Token>();
 
+            // var file = new FileReader();
+            // var fullContext = file.Text;
+            // var tokenFinder = new LexerService(_tokens);
+
+            // int count = 0;
+            // foreach (var context in fullContext)
+            // {
+            //     if(context != ""){
+            //         var tokens = tokenFinder.Show(context,count);
+            //         Console.WriteLine("Token: " + context); 
+            //         foreach (var token in tokens) {
+            //             Console.WriteLine("\t" + token.Value + "\t type: " + token.Type);
+            //         }  
+            //         tokens.Clear();
+            //     }else
+            //     {
+            //         Console.WriteLine("Token: it's a white space"); 
+            //     }
+
+            // }
+
+            #endregion
+
+            #region Parser
+
+            ICollection<ITokenParser> _tokens = new List<ITokenParser>();
             var file = new FileReader();
-            var fullContext = file.Text;
-            var tokenFinder = new LexerService(_tokens);
+            var sentence = file.Text;
 
+            var parserService = new ParserService(_tokens);
             int count = 0;
-            foreach (var context in fullContext)
+            foreach (var item in sentence)
             {
-                if(context != ""){
-                    var tokens = tokenFinder.Show(context,count);
-                    Console.WriteLine("Token: " + context); 
-                    foreach (var token in tokens) {
-                        Console.WriteLine("\t" + token.Value + "\t type: " + token.Type);
-                    }  
-                    tokens.Clear();
-                }else
-                {
-                    Console.WriteLine("Token: it's a white space"); 
-                }
+                System.Console.WriteLine("----------------------------------------------------");
+                if(item != ""){
+                Console.WriteLine( "Expression: " + item );
+                var tokenSentence = parserService.Show(item, count);
 
-            }
+                if (tokenSentence)
+                {
+                    Console.WriteLine("EXPRESSION IS TRUE");
+                    int i  = 0 ; 
+                    foreach (var token in _tokens){
+                        Console.WriteLine( "Token " + ++i  + ":" + "\t" + token.Factor + "\t" + token.GetType());
+                }
+                    Context context = new Context(_tokens);
+                    var parserSentenceExpression = new ParserSentenceExpression();
+                    bool syntaticAnalysis = parserSentenceExpression.Represent(context);
+
+                    if (syntaticAnalysis)
+                        Console.WriteLine("Syntactic analysis is good");
+                    else
+                    {
+                        Console.WriteLine("Syntactic analysis is bad");
+                        Console.WriteLine("Bad token: \t" + context.BadToken.Factor);
+                    }
+                    _tokens.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("FALSE");
+                }
+                
+                Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine( "Expression: " + item );
+                    System.Console.WriteLine("Expression is empty");
+                }
+            }                
         }
+       #endregion
     }
 }

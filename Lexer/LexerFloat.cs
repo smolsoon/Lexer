@@ -5,7 +5,7 @@ using Lexer.Models;
 
 namespace Lexer
 {
-    public class TokenFloat : CheckRegex, ILexer
+    public class LexerFloat : CheckRegex, ILexer
     {
         public Token Show(string substance, int count)
         {

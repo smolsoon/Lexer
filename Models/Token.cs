@@ -1,15 +1,5 @@
 namespace Lexer.Models
 {
-     public enum TokenType
-    {
-        Id, 
-        Number,
-        FloatNumber,
-        Operation,
-        Bracket,
-        BadChar
-    }
-
     public class Token
     {
         public string Value { get; set; }
@@ -19,5 +9,14 @@ namespace Lexer.Models
             Value = value;
             Type = type;
         }
+    }
+    public enum TokenType
+    {
+        Id, 
+        Number,
+        FloatNumber,
+        Operation,
+        Bracket,
+        BadChar
     }
 }
