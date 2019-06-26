@@ -59,7 +59,8 @@ namespace Lexer.Services
 
                 if (Dot(@char))
                 {
-                    throw new ArgumentException(substance);
+                     _tokens.Add(new TokenBadChar(@char.ToString()));
+                    continue;
                 }
 
                 if(OtherChar(@char))
