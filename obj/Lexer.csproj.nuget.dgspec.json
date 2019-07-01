@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ksmol\\Desktop\\Lexer\\Lexer.csproj": {}
+    "C:\\Users\\ksmol\\Desktop\\Lexer\\Lexer.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ksmol\\Desktop\\Lexer\\Lexer.csproj": {
+    "C:\\Users\\ksmol\\Desktop\\Lexer\\Lexer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ksmol\\Desktop\\Lexer\\Lexer.csproj",
+        "projectUniqueName": "C:\\Users\\ksmol\\Desktop\\Lexer\\Lexer.csproj",
         "projectName": "Lexer",
-        "projectPath": "c:\\Users\\ksmol\\Desktop\\Lexer\\Lexer.csproj",
+        "projectPath": "C:\\Users\\ksmol\\Desktop\\Lexer\\Lexer.csproj",
         "packagesPath": "C:\\Users\\ksmol\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ksmol\\Desktop\\Lexer\\obj\\",
+        "outputPath": "C:\\Users\\ksmol\\Desktop\\Lexer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

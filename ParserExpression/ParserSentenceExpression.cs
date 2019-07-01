@@ -11,7 +11,6 @@ namespace Lexer.Parser
             for (var i = 0; i < context.Size; ++i)
             {
                 var token = context.Input.ElementAt(i);
-
                 if (token.GetType() == typeof(TokenNumber) || token.GetType() == typeof(TokenFloat) || 
                     token.GetType() == typeof(TokenId))
                 {
@@ -70,6 +69,16 @@ namespace Lexer.Parser
                         return false;
                     }
                 }
+
+                if(!(token.GetType() == typeof(TokenBracket)))
+                    return false;
+                
+                
+                if(token.GetType() == typeof(TokenOtherChar))
+                {
+                    return false;
+                }
+
                 context.BadToken = token;
                 return false;
             }
@@ -84,10 +93,8 @@ namespace Lexer.Parser
             if (context.Stack.Peek().GetType() == typeof(TokenOperator) && bracket)
                 return true;
             if (context.Stack.Peek().GetType() == typeof(TokenOperator))
-            {
-                context.BadToken = new TokenBadChar("Ended with an operator");
                 return false;
-            }
+    
             return true;
         }
     }

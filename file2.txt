@@ -15,8 +15,6 @@ $
 ^
 &
 *
-
-
 zmienna1 + zmienna2#
 w1a*w2b + @
 10.3-alfa

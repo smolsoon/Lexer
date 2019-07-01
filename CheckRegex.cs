@@ -19,7 +19,7 @@ namespace Lexer
         public bool Operator(char variable)
         {
             return Regex.IsMatch(variable.ToString(), "[\\+\\-\\*\\/\\=]");
-        }
+        } 
 
         public bool Bracket(char variable)
         {

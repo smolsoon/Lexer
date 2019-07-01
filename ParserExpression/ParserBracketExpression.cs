@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Lexer.Models;
 using Lexer.ParserToken;
@@ -37,6 +38,11 @@ namespace Lexer.Parser
                     if(context.Stack.Count() != 0)
                         _context.Stack.Push(context.Stack.Peek());
                     return parserSentenceExpression.Represent(_context);
+                }
+
+                if(token.GetType() == typeof(TokenBracket))
+                {
+                    
                 }
             }
             _context = context;

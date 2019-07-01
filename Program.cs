@@ -5,12 +5,12 @@ using Lexer.Parser;
 using Lexer.Services;
 using Services.Lexer;
 
-namespace Lexer
+namespace Lexer 
 {
-    public class Program
+    public class Program 
     {
-        private static void Main(string[] args)
-        { 
+        private static void Main (string[] args) 
+        {
             #region Lexer   
             // ICollection<Token> _tokens = new List<Token>();
 
@@ -39,53 +39,74 @@ namespace Lexer
 
             #region Parser
 
-            ICollection<ITokenParser> _tokens = new List<ITokenParser>();
-            var file = new FileReader();
+            ICollection<ITokenParser> _tokens = new List<ITokenParser> ();
+            var file = new FileReader ();
             var sentence = file.Text;
 
-            var parserService = new ParserService(_tokens);
+            var parserService = new ParserService (_tokens);
             int count = 0;
             foreach (var item in sentence)
             {
-                System.Console.WriteLine("----------------------------------------------------");
-                if(item != ""){
-                Console.WriteLine( "Expression: " + item );
-                var tokenSentence = parserService.Show(item, count);
-
-                if (tokenSentence)
+                System.Console.WriteLine ("----------------------------------------------------");
+                if (item != "")
                 {
-                    Console.WriteLine("EXPRESSION IS TRUE");
-                    int i  = 0 ; 
-                    foreach (var token in _tokens){
-                        Console.WriteLine( "Token " + ++i  + ":" + "\t" + token.Factor + "\t" + token.GetType());
-                }
-                    Context context = new Context(_tokens);
-                    var parserSentenceExpression = new ParserSentenceExpression();
-                    bool syntaticAnalysis = parserSentenceExpression.Represent(context);
+                    Console.WriteLine ("Expression: " + item);
+                    var tokenSentence = parserService.Show (item, count);
 
-                    if (syntaticAnalysis)
-                        Console.WriteLine("Syntactic analysis is good");
+                    if (tokenSentence)
+                    {
+                        int i = 0;
+
+                        Context context = new Context (_tokens);
+                        var parserSentenceExpression = new ParserSentenceExpression ();
+                        bool syntaticAnalysis = parserSentenceExpression.Represent (context);
+
+                        int coun = 0;
+                        foreach (var token in _tokens)
+                        {
+                            if((token.Factor == "(") || (token.Factor  == ")"))
+                            {
+                                ++coun;
+                            }
+
+                            if(coun == _tokens.Count)
+                            {
+                                syntaticAnalysis = false;
+                            }
+                        }
+                        
+                        if (syntaticAnalysis)
+                        {
+                            foreach (var token in _tokens)
+                            {
+                                Console.WriteLine ("Token " + ++i + ":" + "\t" +
+                                token.Factor + "\t" + token.GetType ());
+                            }
+
+                            Console.WriteLine ("Syntactic analysis : TRUE");
+                        }
+                        else
+                        {
+                            Console.WriteLine ("Syntactic analysis : FALSE");
+                            if(syntaticAnalysis)
+                                Console.WriteLine ("Bad token: \t" + context.BadToken.Factor);
+
+                        }
+                        _tokens.Clear ();
+                    }
                     else
                     {
-                        Console.WriteLine("Syntactic analysis is bad");
-                        Console.WriteLine("Bad token: \t" + context.BadToken.Factor);
+                        Console.WriteLine ("FALSE");
                     }
-                    _tokens.Clear();
+                        Console.WriteLine ();
                 }
                 else
                 {
-                    Console.WriteLine("FALSE");
+                    Console.WriteLine ("Expression: " + item);
+                    System.Console.WriteLine ("Expression is empty");
                 }
-                
-                Console.WriteLine();
-                }
-                else
-                {
-                    Console.WriteLine( "Expression: " + item );
-                    System.Console.WriteLine("Expression is empty");
-                }
-            }                
+            }
         }
-       #endregion
+        #endregion
     }
 }
